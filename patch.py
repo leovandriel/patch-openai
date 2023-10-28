@@ -38,6 +38,10 @@ replacement = f"""
 {indent}{without_cache}
 """.strip()
 
+# Backup the original
+with Path(path.name).open("w") as f:
+    f.write(contents)
+
 # Insert the code and write to disk
 with path.open("w") as f:
     f.write(contents.replace(signature, replacement))

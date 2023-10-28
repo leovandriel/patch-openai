@@ -14,7 +14,11 @@ def log_call(self, args, kwargs, response, cached):
         for message in kwargs["params"]["messages"]
     )
     params = {k: v for k, v in kwargs["params"].items() if k != "messages"}
-    response = response.data["choices"][0]["message"]["content"]
+    message = response.data["choices"][0]["message"]
+    if "function_call" in message:
+        response = message["function_call"]
+    else:
+        response = message["content"]
     sys.stderr.write(
         f"{'>'*8}\n{prompt}\n{params}\n{'='*8}\n{GREEN}{response}{END}\n{'<'*8}\n\n"
     )
