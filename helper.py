@@ -29,7 +29,7 @@ def request_with_cache(self, *args, **kwargs):
     from hashlib import md5
     from pathlib import Path
 
-    cache_dir = Path("cache")
+    cache_dir = Path("openai_cache")
     cache_duration = 3600
 
     data = {
