@@ -10,7 +10,7 @@ def log_call(self, args, kwargs, response, cached):
     END = "\033[0m"
     BLUE = "\033[34m"
     prompt = "\n".join(
-        f'{message["role"]}: {RED if message["role"] == "user" else BLUE}{message["content"]}{END}'
+        f'{message["name"] if "name" in message else message["role"]}: {RED if message["role"] == "user" else BLUE}{message["content"]}{END}'
         for message in kwargs["params"]["messages"]
     )
     params = {k: v for k, v in kwargs["params"].items() if k != "messages"}
